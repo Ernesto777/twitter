@@ -66,7 +66,7 @@ $(document).ready(function() {
 
             },
             
-			    error: function(xhr, status, error) {
+			  error: function(xhr, status, error) {
 			  var error1 = eval("(" + xhr.responseText + ")");
 			  console.log(error1.Message);
 			  console.log(geturl.getAllResponseHeaders());

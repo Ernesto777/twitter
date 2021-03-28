@@ -12,8 +12,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-@Data
+
+@RequiredArgsConstructor
+@Getter
+@ToString
+@EqualsAndHashCode
 @Entity
 public class Post 
 {
@@ -25,6 +33,9 @@ public class Post
 	@ManyToOne(cascade= CascadeType.PERSIST)
 	@JoinColumn(name= "id_user")
 	private final User user;
+	
+	/*@Column(name= "id_user")
+	private final Long useId;*/
 	
 	@Column(name= "description_post")
     private String descriptionPost;
@@ -40,6 +51,22 @@ public class Post
     {
     	this.createdAt= new Date();
     }
+    
+    protected Post()
+    {
+     this.user = null;
+     this.descriptionPost= null;
+     this.imagePath= null;
+     this.createdAt= null;
+    }
+
+	public Post(User user, String descriptionPost, String imagePath, Date createdAt) 
+	{
+		this.user = user;
+		this.descriptionPost= descriptionPost;
+	    this.imagePath= imagePath;
+	    this.createdAt= createdAt;
+	}
 
 
 }
