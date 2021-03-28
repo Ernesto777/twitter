@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+
+ <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+</head>
+<body>
+
+ <div class="container h-100">
+ <br>  
+<hr>
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="card">
+                <h4 class="card-header">Login</h4>
+                <div class="card-body">
+
+                    <form data-toggle="validator" role="form" method="post" action="#">
+                        <input type="hidden" class="hide" id="csrf_token" name="csrf_token" value="C8nPqbqTxzcML7Hw0jLRu41ry5b9a10a0e2bc2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>User</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-envelope-open-o" aria-hidden="true"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="login_email" value="JossMP" pattern=".{4,}" title="Cuatro(4) o mas caracteres" required="">
+                                    </div>
+                                    <div class="help-block with-errors text-danger"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-unlock" aria-hidden="true"></i></span>
+                                        </div>
+                                        <input type="password" name="login_password" class="form-control" pattern=".{4,}" title="Cuatro(4) o mas caracteres" required="">
+                                    </div>
+                                    <div class="help-block with-errors text-danger"></div>
+                                </div>
+                            </div>
+                        </div>
+ 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="hidden" name="redirect" value="">
+                                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Login" name="submit">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="clear"></div>
+                    <i class="fa fa-user fa-fw"></i> Don't have an account yet? <a href="#">Sign up</a><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
