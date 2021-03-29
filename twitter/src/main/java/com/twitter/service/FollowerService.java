@@ -6,5 +6,7 @@ import com.twitter.domain.User;
 
 public interface FollowerService 
 {
-	List<User> unFollowUsers(Long idFollower);
+	List<User> notFollowedUsers(Long idFollower);
+	
+	User selectedUserFollow(Long userIdFollow, Long userIdFollower);
 }

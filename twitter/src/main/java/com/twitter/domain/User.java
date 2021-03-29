@@ -54,5 +54,14 @@ public final class User
     	fullName= null;
     	email= null;
     }
+    
+    public User(Long id, String userName) 
+    {
+    	this.id= id;
+    	this.userName = userName;
+		this.pass = "";
+		this.fullName = "";
+		this.email = "";
+    }
 	
 }

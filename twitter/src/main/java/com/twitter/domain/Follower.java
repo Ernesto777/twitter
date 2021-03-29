@@ -29,12 +29,18 @@ public class Follower
 	@JoinColumn(name= "id_user")
     private final User user;
 	    
-    @Column(name= "id_follewer")
-    private String idFollewer;
+    @Column(name= "id_follower")
+    private Long idFollewer;
     
     protected Follower()
     {
      this.user = null;
      this.idFollewer= null;
     }
+
+	public Follower(User followed, Long idFollower) 
+	{
+		this.user= followed;
+		this.idFollewer= idFollower;
+	}
 }

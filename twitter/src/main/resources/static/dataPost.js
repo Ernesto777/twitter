@@ -1,28 +1,22 @@
 function updateSuggestedUsers(userId) 
 {
+    $('#suggest-head').empty();
+
     $.ajax({
             url: "http://localhost:8080/follow?userId=" + userId,
     }).then(function(data) 
     {
-        // Cleans the form
-        //$("#attempt-form").find( "input[name='result-attempt']" ).val("");
-        //$("#attempt-form").find( "input[name='user-alias']" ).val("");
         // Gets a random challenge from API and loads the data in the HTML
 
         data.forEach(function(row)
-        {
-            /*$('#results-body').append('<tr><td>' + row.id + '</td>' +
-            '<td>' + row.multiplication.factorA + ' x ' + row.multiplication.factorB + '</td>' +
-            '<td>' + row.resultAttempt + '</td>' +
-            '<td>' + (row.correct === true ? 'YES' : 'NO' + '</td></tr>')); */
-
+        {        
             if(row.id == userId)
             {
               return;
             }
 
             $('#suggest-head').append('<tr><td>' + row.userName + '</td>' + 
-                        '<td><input type="button" value="Follow" class="btn btn-default" onclick="followUser('+row.id+');"></td></tr>');
+                        '<td><input type="button" value="Follow" class="btn btn-default" onclick="followUser('+row.id+','+userId+');"></td></tr>');
             //'<tr><td><form id="suggest-btn-form"><div class="form-group"><input type="submit" value="Follow" class="btn btn-default"></div></form></td></tr>');
             /*'<td>' + row.multiplication.factorA + ' x ' + row.multiplication.factorB + '</td>' +
             '<td>' + row.resultAttempt + '</td>' +
@@ -36,7 +30,7 @@ function updateSuggestedUsers(userId)
 }
 
 
-function followUser(userId) 
+function followUser(userIdFollow, userIdFollower) 
 {
      // Don't submit the form normally
         event.preventDefault();
@@ -51,22 +45,19 @@ function followUser(userId)
 
         // Send the data using post
         $.ajax({
-            //url: 'http://localhost:8080/publications',
+            url: "http://localhost:8080/follow?userIdFollow="+ userIdFollow+"&userIdFollower="+ userIdFollower,
             type: 'POST',
-            data: JSON.stringify(data),
+            //data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: false,
             success: function(data)
             {
 
+                    alert(data.userName + " Followed");
                     $('#posts-div').show();
                     $('#post-head').empty();
                     $('#post-body').empty();
-
-                    $('#post-head').append('<tr><th> User name: ' + data.user.userName + '</th></tr>' +
-                                           '<tr><th>' + data.descriptionPost + '</th></tr>' +
-                                           '<tr><th> Creation date: ' + data.createdAt + '</th></tr>'); 
                 
             },
             

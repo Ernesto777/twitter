@@ -1,10 +1,12 @@
 package com.twitter.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.twitter.domain.Follower;
 import com.twitter.domain.User;
 import com.twitter.repository.FollowerRepository;
 import com.twitter.repository.UserRepository;
@@ -24,12 +26,14 @@ public class FollowerServiceImpl implements FollowerService
 	}
 	
 	@Override
-	public List<User> unFollowUsers(Long idFollower) 
+	public List<User> notFollowedUsers(Long idFollower) 
 	{
 		List<User> unFollowUsers;
 		
+		//Retrieve followed users
 		List<Long> followUser= followerRepo.findByIdFollower(idFollower);
 		
+		//if nobody is followed yet, retrieve all of users
 		if(followUser.isEmpty())
 		{
 			unFollowUsers= (List<User>) userRepo.findAll();
@@ -37,10 +41,47 @@ public class FollowerServiceImpl implements FollowerService
 		
 		else
 		{
+			//Retrieve notfollowed users
 			unFollowUsers= userRepo.findByIdUser(followUser);
 		}
 		
 		return unFollowUsers;
+	}
+	
+	/*@Override
+	public List<User> unFollowUsers(Long idFollower) 
+	{
+		List<User> unFollowUsers;
+		
+		//Retrieve unfollow users
+		List<Long> followUser= followerRepo.findByIdFollower(idFollower);
+		
+		//if nobody is followed yet, retrieve all of users
+		if(followUser.isEmpty())
+		{
+			unFollowUsers= (List<User>) userRepo.findAll();
+		}
+		
+		else
+		{
+			//Retrieve unfollow users
+			unFollowUsers= userRepo.findByIdUser(followUser);
+		}
+		
+		return unFollowUsers;
+	}*/
+
+	@Override
+	public User selectedUserFollow(Long userIdFollow, Long userIdFollower) 
+	{
+		User followed = userRepo.getById(userIdFollow);
+		User follower = userRepo.getById(userIdFollower);
+
+		Follower newFollower= new Follower(followed, follower.getId());
+		
+		followerRepo.save(newFollower);
+		
+		return followed;
 	}
 
 }

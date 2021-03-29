@@ -15,9 +15,10 @@ public interface UserRepository extends CrudRepository<User,Long>
 	Optional<String> findByUserName(String username);
 	User getByUserName(String username);
 	
-	@Query("SELECT u.id, u.userName FROM com.twitter.domain.User u WHERE u.id IN :ids")
+	@Query("SELECT new User(u.id, u.userName) FROM com.twitter.domain.User u WHERE u.id NOT IN :ids")
 	List<User> findByIdUser(@Param("ids") List<Long> ids);
 
+	User getById(Long idUser);
 	
 	//List<User> findByIdUser(List<Long> id);
 

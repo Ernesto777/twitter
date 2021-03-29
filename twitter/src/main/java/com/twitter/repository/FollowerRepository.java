@@ -9,7 +9,11 @@ import com.twitter.domain.Follower;
 
 public interface FollowerRepository extends CrudRepository<Follower,Long> 
 {
-	@Query(value = "select distinct(id_user) from follower where id_follower <> ?1", 
+	/*@Query(value = "select distinct(id_user) from follower where id_user <> ?1", 
 		   nativeQuery = true)
-	List<Long> findByIdFollower(Long idFollower);
+	List<Long> findByIdFollower(Long idFollower);*/
+	
+	@Query(value = "select distinct(id_user) from follower where id_follower = ?1", 
+			   nativeQuery = true)
+		List<Long> findByIdFollower(Long idFollower);
 }
