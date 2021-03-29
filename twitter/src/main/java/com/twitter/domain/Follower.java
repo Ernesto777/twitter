@@ -1,5 +1,6 @@
 package com.twitter.domain;
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,9 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-@Data
+@RequiredArgsConstructor
+@Getter
+@ToString
+@EqualsAndHashCode
 @Entity
 public class Follower 
 {
@@ -24,4 +31,10 @@ public class Follower
 	    
     @Column(name= "id_follewer")
     private String idFollewer;
+    
+    protected Follower()
+    {
+     this.user = null;
+     this.idFollewer= null;
+    }
 }
