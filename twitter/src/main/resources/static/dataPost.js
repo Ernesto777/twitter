@@ -49,6 +49,8 @@ function followUser(userIdFollow, userIdFollower)
                     $('#post-head').empty();
                     $('#post-body').empty();
 
+                    $('#suggest-head').empty();
+
                     /*$('#post-head').append('<tr><th> User name: ' + data.user.userName + '</th></tr>' +
                                            '<tr><th>' + data.descriptionPost + '</th></tr>' +
                                            '<tr><th> Creation date: ' + data.createdAt + '</th></tr>'); */
@@ -73,6 +75,12 @@ $(document).ready(function()
 {
     $("#post-form").submit(function( event ) 
     {
+
+        if(document.getElementById("userName-post").value.length == 0)
+        {
+            alert("User name is empty");
+            return false;
+        }
 
         // Don't submit the form normally
         event.preventDefault();
