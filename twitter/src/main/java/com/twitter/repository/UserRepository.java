@@ -13,6 +13,7 @@ public interface UserRepository extends CrudRepository<User,Long>
 {
 
 	Optional<String> findByUserName(String username);
+	
 	User getByUserName(String username);
 	
 	//not followed

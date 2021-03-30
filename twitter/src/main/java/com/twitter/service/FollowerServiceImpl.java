@@ -52,9 +52,19 @@ public class FollowerServiceImpl implements FollowerService
 	@Override
 	public User selectedUserFollow(Long userIdFollow, Long userIdFollower) 
 	{
+		
+		List<Long> followUser= followerRepo.findByIdFollower(userIdFollower);
+		
 		User followed = userRepo.getById(userIdFollow);
 		User follower = userRepo.getById(userIdFollower);
 
+		for (Long temp : followUser) 
+        {
+        	if(temp == userIdFollow)
+        		return follower;
+        	        		
+        }
+		
 		Follower newFollower= new Follower(followed, follower.getId());
 		
 		followerRepo.save(newFollower);

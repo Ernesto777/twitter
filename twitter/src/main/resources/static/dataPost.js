@@ -37,6 +37,13 @@ function followUser(userIdFollow, userIdFollower)
             async: false,
             success: function(data)
             {
+
+                    if(data.id == userIdFollower)
+                    {
+                      alert("user alredy Followed");
+                      return;
+                    }
+
                     alert(data.userName + " Followed");
                     $('#posts-div').show();
                     $('#post-head').empty();
@@ -96,8 +103,8 @@ $(document).ready(function()
                     userId= data.user.id;
 
                     $('#post-head').append('<tr><th> User name: ' + data.user.userName + '</th></tr>' +
-                                           '<tr><th>' + data.descriptionPost + '</th></tr>' +
-                                           '<tr><th> Creation date: ' + data.createdAt + '</th></tr>'); 
+                                           '<tr><td>' + data.descriptionPost + '</td>' +
+                                              '<td> Creation date: ' + data.createdAt + '</td></tr>'); 
                 
             },
             

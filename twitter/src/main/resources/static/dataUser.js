@@ -6,18 +6,38 @@ $(document).ready(function() {
     $("#registration-form").submit(function( event ) 
     {
 
+
+        if(document.getElementById("userName").value.length == 0)
+        {
+            alert("User name is empty");
+            return false;
+        }
+
+        if(document.getElementById("fullName").value.length == 0)
+        {
+            alert("Full name is empty");
+            return false;
+        }
+
+        if(document.getElementById("email").value.length == 0)
+        {
+            alert("email is empty");
+            return false;
+        }
+
+        if(document.getElementById("pass").value.length == 0)
+        {
+            alert("password is empty");
+            return false;
+        }
+
+        if(document.getElementById("passC").value.length == 0)
+        {
+            alert("repeat password is empty");
+            return false;
+        }
         // Don't submit the form normally
         event.preventDefault();
-
-        // Get some values from elements on the page
-        /*
-        var a = $('.multiplication-a').text();
-        var b = $('.multiplication-b').text();
-        var $form = $( this ),
-            attempt = $form.find( "input[name='result-attempt']" ).val(),
-            userAlias = $form.find( "input[name='user-alias']" ).val();
-
-         */
          
          var userNameR = document.getElementById("userName").value;
          var userFullName = document.getElementById("fullName").value;
@@ -32,8 +52,9 @@ $(document).ready(function() {
          	return;
          }
 
+
+
         // Compose the data in the format that the API is expecting
-        //var data = { user: {userName: userNameR,fullName: userFullName, email: userEmail, pass: userPass}};
         var data = { userName: userNameR,fullName: userFullName, email: userEmail, pass: userPass};
 
 
@@ -45,34 +66,20 @@ $(document).ready(function() {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: false,
-            success: function(response)
+            success: function(result)
             {
 
-			    if (response != 'error') 
-			    {
-			        location.href = response;
-			    }
-			    
-      			if(response != "1")
+      			if(result == 1)
       			{
-      				$('.result-message').empty().append(result);
+      			   alert("User registered, Welcome!");
       			}
 
-
-                if (response.redirectUrl !== undefined) 
-                {
-                	window.location.replace(response.redirectUrl);
-            	} 
-
             },
-            
-			  error: function(xhr, status, error) {
-			  var error1 = eval("(" + xhr.responseText + ")");
-			  console.log(error1.Message);
-			  console.log(geturl.getAllResponseHeaders());
-			  alert("error!"+ geturl.getAllResponseHeaders());
-			}
 
+            error: function(data)
+            {
+              alert(data.responseText);
+            }
         });
     });
 });
