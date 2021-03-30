@@ -28,7 +28,7 @@ public class FollowerServiceImpl implements FollowerService
 	@Override
 	public List<User> notFollowedUsers(Long idFollower) 
 	{
-		List<User> unFollowUsers;
+		List<User> notFollowedUsers;
 		
 		//Retrieve followed users
 		List<Long> followUser= followerRepo.findByIdFollower(idFollower);
@@ -36,40 +36,18 @@ public class FollowerServiceImpl implements FollowerService
 		//if nobody is followed yet, retrieve all of users
 		if(followUser.isEmpty())
 		{
-			unFollowUsers= (List<User>) userRepo.findAll();
+			notFollowedUsers= (List<User>) userRepo.findAll();
 		}
 		
 		else
 		{
 			//Retrieve notfollowed users
-			unFollowUsers= userRepo.findByIdUser(followUser);
+			notFollowedUsers= userRepo.findByIdUser(followUser);
 		}
 		
-		return unFollowUsers;
+		return notFollowedUsers;
 	}
 	
-	/*@Override
-	public List<User> unFollowUsers(Long idFollower) 
-	{
-		List<User> unFollowUsers;
-		
-		//Retrieve unfollow users
-		List<Long> followUser= followerRepo.findByIdFollower(idFollower);
-		
-		//if nobody is followed yet, retrieve all of users
-		if(followUser.isEmpty())
-		{
-			unFollowUsers= (List<User>) userRepo.findAll();
-		}
-		
-		else
-		{
-			//Retrieve unfollow users
-			unFollowUsers= userRepo.findByIdUser(followUser);
-		}
-		
-		return unFollowUsers;
-	}*/
 
 	@Override
 	public User selectedUserFollow(Long userIdFollow, Long userIdFollower) 

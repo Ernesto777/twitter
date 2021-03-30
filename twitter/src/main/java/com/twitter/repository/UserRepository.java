@@ -15,6 +15,7 @@ public interface UserRepository extends CrudRepository<User,Long>
 	Optional<String> findByUserName(String username);
 	User getByUserName(String username);
 	
+	//not followed
 	@Query("SELECT new User(u.id, u.userName) FROM com.twitter.domain.User u WHERE u.id NOT IN :ids")
 	List<User> findByIdUser(@Param("ids") List<Long> ids);
 
@@ -24,4 +25,8 @@ public interface UserRepository extends CrudRepository<User,Long>
 
 	Optional<String> findByEmail(String email);
 	//boolean findByEmail(String email);
+	
+	//followed
+	@Query("SELECT new User(u.id, u.userName) FROM com.twitter.domain.User u WHERE u.id IN :ids")
+	List<User> getByIdUser(@Param("ids") List<Long> ids);
 }

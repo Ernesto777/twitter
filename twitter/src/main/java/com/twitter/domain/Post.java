@@ -68,5 +68,11 @@ public class Post
 	    this.createdAt= createdAt;
 	}
 
+	public Post(User user, String descriptionPost, Date createdAt) 
+	{
+		this.user= user;
+		this.descriptionPost= descriptionPost;
+	    this.createdAt= createdAt;
+	}
 
 }
